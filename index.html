@@ -57,9 +57,66 @@ button{width:100%;margin-top:22px;padding:15px;border:0;border-radius:14px;backg
 const times=['10:00','11:30','13:00','14:30','16:00','17:30','19:00'];
 let selected='';
 const box=document.getElementById('times');
-times.forEach(t=>{let b=document.createElement('button');b.className='time';b.type='button';b.textContent=t;b.onclick=()=>{selected=t;document.querySelectorAll('.time').forEach(x=>x.classList.remove('active'));b.classList.add('active')};box.appendChild(b)});
+
+function loadTimes(){
+  selected='';
+  box.innerHTML='';
+  const date=document.getElementById('date').value;
+
+  if(!date){
+    times.forEach(t=>addTimeButton(t,false));
+    return;
+  }
+
+  const callbackName='byMaralAvailability_'+Date.now();
+  window[callbackName]=function(data){
+    try{
+      const booked=Array.isArray(data.booked)?data.booked:[];
+      times.forEach(t=>addTimeButton(t,booked.includes(t)));
+    }finally{
+      delete window[callbackName];
+      const script=document.getElementById(callbackName);
+      if(script) script.remove();
+    }
+  };
+
+  const script=document.createElement('script');
+  script.id=callbackName;
+  script.src=GOOGLE_SCRIPT_URL+'?action=availability&date='+encodeURIComponent(date)+'&callback='+encodeURIComponent(callbackName);
+  script.onerror=function(){
+    delete window[callbackName];
+    script.remove();
+    times.forEach(t=>addTimeButton(t,false));
+  };
+  document.body.appendChild(script);
+}
+
+function addTimeButton(t,booked){
+  const b=document.createElement('button');
+  b.className='time';
+  b.type='button';
+  b.textContent=booked ? t+' (رزرو شده)' : t;
+  b.disabled=booked;
+  if(booked){
+    b.style.opacity='.35';
+    b.style.cursor='not-allowed';
+  }else{
+    b.onclick=()=>{
+      selected=t;
+      document.querySelectorAll('.time').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    };
+  }
+  box.appendChild(b);
+}
+
+document.getElementById('date').addEventListener('change',loadTimes);
 document.getElementById('date').min=new Date().toISOString().split('T')[0];
+
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXmK1YOEYR2RDkpm2lD9tMJsbV91zDA_-XAy4QW8SiohGwXM6VE0huPxGHsWU0fFWO/exec";
+
+loadTimes();
+
 async function book(){
  const n=document.getElementById('name').value.trim();
  const p=document.getElementById('phone').value.trim();
