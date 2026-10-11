@@ -59,11 +59,43 @@ let selected='';
 const box=document.getElementById('times');
 times.forEach(t=>{let b=document.createElement('button');b.className='time';b.type='button';b.textContent=t;b.onclick=()=>{selected=t;document.querySelectorAll('.time').forEach(x=>x.classList.remove('active'));b.classList.add('active')};box.appendChild(b)});
 document.getElementById('date').min=new Date().toISOString().split('T')[0];
-function book(){
- const n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),d=document.getElementById('date').value,s=document.getElementById('service').value;
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXmK1YOEYR2RDkpm2lD9tMJsbV91zDA_-XAy4QW8SiohGwXM6VE0huPxGHsWU0fFWO/exec";
+async function book(){
+ const n=document.getElementById('name').value.trim();
+ const p=document.getElementById('phone').value.trim();
+ const d=document.getElementById('date').value;
+ const s=document.getElementById('service').value;
+ const success=document.getElementById('success');
+ const submitButton=document.querySelector('#booking > button');
  if(!n||!p||!d||!selected){alert('لطفاً نام، شماره تماس، تاریخ و ساعت را کامل انتخاب کنید.');return}
- document.getElementById('success').style.display='block';
- document.getElementById('success').innerHTML=`<strong>درخواست نوبت ثبت شد ✨</strong><br><br>${n}<br>${s}<br>${d} — ${selected}<br><a class="ig" href="https://instagram.com/" target="_blank">اینستاگرام مارال</a>`;
+ if(d < new Date().toLocaleDateString('en-CA')){alert('لطفاً تاریخ امروز یا یک روز آینده را انتخاب کنید.');return}
+ const payload={name:n,phone:p,service:s,date:d,time:selected};
+ submitButton.disabled=true;
+ submitButton.textContent='در حال ارسال...';
+ try{
+   await fetch(GOOGLE_SCRIPT_URL,{
+     method:'POST',
+     mode:'no-cors',
+     headers:{'Content-Type':'text/plain;charset=utf-8'},
+     body:JSON.stringify(payload)
+   });
+   success.style.display='block';
+   success.replaceChildren();
+   const title=document.createElement('strong');
+   title.textContent='درخواست نوبت شما ارسال شد ✨';
+   const details=document.createElement('p');
+   details.textContent=n+' — '+s;
+   const dateTime=document.createElement('p');
+   dateTime.textContent=d+' — '+selected;
+   const note=document.createElement('p');
+   note.textContent='درخواست شما برای هماهنگی نهایی ثبت ارسال شده است؛ تا تأیید نهایی منتظر بمانید.';
+   success.append(title,details,dateTime,note);
+   submitButton.textContent='درخواست ارسال شد';
+ }catch(error){
+   alert('ارسال درخواست انجام نشد. اتصال اینترنت را بررسی کنید و دوباره امتحان کنید.');
+   submitButton.disabled=false;
+   submitButton.textContent='ثبت درخواست نوبت';
+ }
 }
 </script>
 </body>
