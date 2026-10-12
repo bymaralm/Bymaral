@@ -3,157 +3,60 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MARAL | رزرو نوبت</title>
+<title>BYMARAL | رزرو نوبت</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0b0b0d;color:#f7f2f4;font-family:Tahoma,Arial,sans-serif}
-.wrap{max-width:920px;margin:auto;padding:28px 18px 50px}.hero{text-align:center;padding:48px 10px 28px}
-.logo{font:700 42px Georgia,serif;letter-spacing:5px;color:#f2b7c8}.sub{color:#cfc6ca;margin-top:10px;font-size:14px}
-.tag{font-family:'Times New Roman',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:1px;font-size:21px;margin:24px 0 0;color:#e7d9de}.card{background:#141316;border:1px solid #2b272b;border-radius:24px;padding:24px;margin-top:20px;box-shadow:0 15px 50px #0008}
-h2{font:700 22px Georgia,serif;margin:0 0 20px;color:#f2b7c8}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;color:#d9d0d4;font-size:13px;margin-bottom:7px}input,select{width:100%;padding:14px;border-radius:13px;border:1px solid #393338;background:#0e0d0f;color:#fff;font-size:15px;outline:none}
-.full{grid-column:1/-1}.times{display:flex;flex-wrap:wrap;gap:9px}.time{border:1px solid #393338;background:#0e0d0f;color:#eee;border-radius:12px;padding:11px 16px;cursor:pointer}.time.active{background:#e6aabd;color:#171116;border-color:#e6aabd}
-button{width:100%;margin-top:22px;padding:15px;border:0;border-radius:14px;background:#e6aabd;color:#171116;font-weight:700;font-size:16px;cursor:pointer}
-.note{text-align:center;color:#aaa0a5;font-size:12px;margin-top:13px}.success{display:none;text-align:center;padding:25px}.success strong{color:#f2b7c8}.ig{display:inline-block;color:#f2b7c8;text-decoration:none;margin-top:12px}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.logo{font-size:35px}}
+*{box-sizing:border-box}body{margin:0;background:#0b0b0d;color:#f7f2f4;font-family:Tahoma,Arial,sans-serif}.wrap{max-width:900px;margin:auto;padding:22px 16px 45px}.hero{text-align:center;padding:35px 10px 22px}.logo{font:700 42px Georgia;color:#f2b7c8;letter-spacing:5px}.sub{color:#cfc6ca;font-size:13px;margin-top:9px}.tag{font:italic 20px Georgia;color:#e7d9de;margin-top:18px}.card{background:#141316;border:1px solid #2b272b;border-radius:22px;padding:20px;margin-top:18px;box-shadow:0 12px 40px #0008}h2{font:700 21px Georgia;color:#f2b7c8;margin:0 0 18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{display:block;color:#d9d0d4;font-size:13px;margin-bottom:6px}input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #393338;background:#0e0d0f;color:#fff;font-size:15px;outline:none}.full{grid-column:1/-1}.times{display:flex;flex-wrap:wrap;gap:8px}.time{width:auto;margin:0;padding:10px 15px;border:1px solid #393338;background:#0e0d0f;color:#eee;border-radius:11px;cursor:pointer}.time.active{background:#e6aabd;color:#171116;border-color:#e6aabd}.time.booked{opacity:.35;cursor:not-allowed;text-decoration:line-through}.submit{width:100%;margin-top:20px;padding:15px;border:0;border-radius:13px;background:#e6aabd;color:#171116;font-weight:700;font-size:16px}.note{text-align:center;color:#aaa0a5;font-size:12px;margin-top:11px}.success{display:none;text-align:center;padding:20px;color:#ddd}.success strong{color:#f2b7c8}.calendar{background:#0e0d0f;border:1px solid #393338;border-radius:14px;padding:12px}.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.calhead button{background:#292529;color:#fff;border:0;border-radius:9px;padding:7px 12px;cursor:pointer}.caltitle{font-weight:bold;color:#f2b7c8}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}.week div{font-size:11px;color:#aaa;padding:4px}.day{padding:9px 3px;border:0;border-radius:9px;background:#191719;color:#eee;cursor:pointer}.day:hover{background:#292529}.day.empty{visibility:hidden}.day.disabled{opacity:.25;cursor:not-allowed}.day.selected{background:#e6aabd;color:#171116}.day.holiday{border:1px solid #7b4c60}.chosen{margin-top:8px;color:#aaa;font-size:12px}.footer{text-align:center;color:#aaa;margin-top:25px;font-size:13px}.footer a{color:#f2b7c8;text-decoration:none;margin:0 8px}.loading{text-align:center;color:#aaa;padding:15px}@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.logo{font-size:35px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <section class="hero">
-    <div class="logo">MARAL</div>
-    <div class="sub">HAIR ARTIST • HAIR STUDIO</div>
-    <div class="tag">Your hair is my art</div>
-  </section>
+<section class="hero"><div class="logo">BYMARAL</div><div class="sub">HAIR ARTIST • HAIR STUDIO</div><div class="tag">Your hair is my art</div></section>
 
-  <section class="card" id="booking">
-    <h2>رزرو نوبت</h2>
-    <div class="grid">
-      <div><label>نام و نام خانوادگی</label><input id="name" placeholder="مثلاً مارال محمدی"></div>
-      <div><label>شماره تماس</label><input id="phone" type="tel" placeholder="09xxxxxxxxx"></div>
-      <div><label>خدمت</label>
-        <select id="service">
-          <option>کوتاهی مو</option><option>کوتاهی + براشینگ</option><option>استایل و براشینگ</option><option>مشاوره انتخاب مدل مو</option>
-        </select>
-      </div>
-      <div><label>تاریخ</label><input id="date" type="date"></div>
-      <div class="full"><label>ساعت موردنظر</label><div class="times" id="times"></div></div>
-    </div>
-    <button onclick="book()">ثبت درخواست نوبت</button>
-    <div class="note">پس از ثبت، درخواست شما برای هماهنگی نهایی نمایش داده می‌شود.</div>
-    <div class="success" id="success"></div>
-  </section>
-
-  <section class="card">
-    <h2>خدمات</h2>
-    <div class="grid">
-      <div><b>کوتاهی مو</b><p class="sub">طراحی متناسب با فرم صورت و استایل شما</p></div>
-      <div><b>کوتاهی + براشینگ</b><p class="sub">کات و استایل نهایی</p></div>
-      <div><b>براشینگ</b><p class="sub">استایل حرفه‌ای مو</p></div>
-      <div><b>مشاوره</b><p class="sub">انتخاب مدل مناسب مو</p></div>
-    </div>
-  </section>
+<section class="card" id="booking">
+<h2>رزرو نوبت</h2>
+<div id="loading" class="loading">در حال دریافت تنظیمات...</div>
+<div id="form" style="display:none">
+<div class="grid">
+<div><label>نام و نام خانوادگی</label><input id="name" placeholder="مثلاً مارال محمدی"></div>
+<div><label>شماره تماس</label><input id="phone" type="tel" placeholder="09xxxxxxxxx"></div>
+<div><label>خدمات</label><select id="service"></select></div>
+<div><label>مدل مو</label><select id="hairModel"></select></div>
+<div class="full"><label>تاریخ</label><div class="calendar">
+<div class="calhead"><button type="button" onclick="changeMonth(-1)">‹</button><div id="calTitle" class="caltitle"></div><button type="button" onclick="changeMonth(1)">›</button></div>
+<div class="week"><div>ش</div><div>ی</div><div>د</div><div>س</div><div>چ</div><div>پ</div><div>ج</div></div>
+<div id="days" class="days"></div><div id="chosen" class="chosen">تاریخی انتخاب نشده</div>
+</div></div>
+<div class="full"><label>ساعت موردنظر</label><div id="times" class="times"><div class="loading">ابتدا تاریخ را انتخاب کنید.</div></div></div>
 </div>
+<button class="submit" id="submit" onclick="book()">ثبت درخواست نوبت</button>
+<div class="note">ساعت‌های رزروشده قابل انتخاب نیستند.</div>
+<div class="success" id="success"></div>
+</div>
+</section>
+
+<footer class="footer" id="footer">BYMARAL</footer>
+</div>
+
 <script>
-const times=['10:00','11:30','13:00','14:30','16:00','17:30','19:00'];
-let selected='';
-const box=document.getElementById('times');
-
-function loadTimes(){
-  selected='';
-  box.innerHTML='';
-  const date=document.getElementById('date').value;
-
-  if(!date){
-    times.forEach(t=>addTimeButton(t,false));
-    return;
-  }
-
-  const callbackName='byMaralAvailability_'+Date.now();
-  window[callbackName]=function(data){
-    try{
-      const booked=Array.isArray(data.booked)?data.booked:[];
-      times.forEach(t=>addTimeButton(t,booked.includes(t)));
-    }finally{
-      delete window[callbackName];
-      const script=document.getElementById(callbackName);
-      if(script) script.remove();
-    }
-  };
-
-  const script=document.createElement('script');
-  script.id=callbackName;
-  script.src=GOOGLE_SCRIPT_URL+'?action=availability&date='+encodeURIComponent(date)+'&callback='+encodeURIComponent(callbackName);
-  script.onerror=function(){
-    delete window[callbackName];
-    script.remove();
-    times.forEach(t=>addTimeButton(t,false));
-  };
-  document.body.appendChild(script);
-}
-
-function addTimeButton(t,booked){
-  const b=document.createElement('button');
-  b.className='time';
-  b.type='button';
-  b.textContent=booked ? t+' (رزرو شده)' : t;
-  b.disabled=booked;
-  if(booked){
-    b.style.opacity='.35';
-    b.style.cursor='not-allowed';
-  }else{
-    b.onclick=()=>{
-      selected=t;
-      document.querySelectorAll('.time').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-    };
-  }
-  box.appendChild(b);
-}
-
-document.getElementById('date').addEventListener('change',loadTimes);
-document.getElementById('date').min=new Date().toISOString().split('T')[0];
-
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyXmK1YOEYR2RDkpm2lD9tMJsbV91zDA_-XAy4QW8SiohGwXM6VE0huPxGHsWU0fFWO/exec";
-
-loadTimes();
-
-async function book(){
- const n=document.getElementById('name').value.trim();
- const p=document.getElementById('phone').value.trim();
- const d=document.getElementById('date').value;
- const s=document.getElementById('service').value;
- const success=document.getElementById('success');
- const submitButton=document.querySelector('#booking > button');
- if(!n||!p||!d||!selected){alert('لطفاً نام، شماره تماس، تاریخ و ساعت را کامل انتخاب کنید.');return}
- if(d < new Date().toLocaleDateString('en-CA')){alert('لطفاً تاریخ امروز یا یک روز آینده را انتخاب کنید.');return}
- const payload={name:n,phone:p,service:s,date:d,time:selected};
- submitButton.disabled=true;
- submitButton.textContent='در حال ارسال...';
- try{
-   await fetch(GOOGLE_SCRIPT_URL,{
-     method:'POST',
-     mode:'no-cors',
-     headers:{'Content-Type':'text/plain;charset=utf-8'},
-     body:JSON.stringify(payload)
-   });
-   success.style.display='block';
-   success.replaceChildren();
-   const title=document.createElement('strong');
-   title.textContent='درخواست نوبت شما ارسال شد ✨';
-   const details=document.createElement('p');
-   details.textContent=n+' — '+s;
-   const dateTime=document.createElement('p');
-   dateTime.textContent=d+' — '+selected;
-   const note=document.createElement('p');
-   note.textContent='درخواست شما برای هماهنگی نهایی ثبت ارسال شده است؛ تا تأیید نهایی منتظر بمانید.';
-   success.append(title,details,dateTime,note);
-   submitButton.textContent='درخواست ارسال شد';
- }catch(error){
-   alert('ارسال درخواست انجام نشد. اتصال اینترنت را بررسی کنید و دوباره امتحان کنید.');
-   submitButton.disabled=false;
-   submitButton.textContent='ثبت درخواست نوبت';
- }
-}
+const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbyXmK1YOEYR2RDkpm2lD9tMJsbV91zDA_-XAy4QW8SiohGwXM6VE0huPxGHsWU0fFWO/exec";
+let data=null,selectedTime="",selectedDate="",jy,jm,holidays=[];
+const months=["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
+const faNum=n=>String(n).replace(/\\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function jsonp(action,extra={}){return new Promise((resolve,reject)=>{const cb="cb_"+Date.now()+"_"+Math.random().toString(36).slice(2);window[cb]=v=>{delete window[cb];s.remove();resolve(v)};const q=new URLSearchParams({action,...extra,callback:cb});const s=document.createElement("script");s.src=GOOGLE_SCRIPT_URL+"?"+q;s.onerror=()=>{delete window[cb];s.remove();reject(new Error("اتصال برقرار نشد"))};document.body.appendChild(s)})}
+function pToday(){const a=new Intl.DateTimeFormat("en-US-u-ca-persian",{year:"numeric",month:"numeric",day:"numeric"}).formatToParts(new Date());return {y:+a.find(x=>x.type==="year").value,m:+a.find(x=>x.type==="month").value,d:+a.find(x=>x.type==="day").value}}
+function pOf(g){const a=new Intl.DateTimeFormat("en-US-u-ca-persian",{year:"numeric",month:"numeric",day:"numeric"}).formatToParts(g);return {y:+a.find(x=>x.type==="year").value,m:+a.find(x=>x.type==="month").value,d:+a.find(x=>x.type==="day").value}}
+function gOf(y,m,d){const start=new Date(y+621,2,1);for(let i=0;i<400;i++){const g=new Date(start);g.setDate(start.getDate()+i);const p=pOf(g);if(p.y===y&&p.m===m&&p.d===d)return g}return null}
+function iso(g){return g.getFullYear()+"-"+String(g.getMonth()+1).padStart(2,"0")+"-"+String(g.getDate()).padStart(2,"0")}
+function daysInMonth(y,m){if(m<=6)return 31;if(m<=11)return 30;return gOf(y,m,30)?30:29}
+function renderCalendar(){document.getElementById("calTitle").textContent=months[jm-1]+" "+faNum(jy);const box=document.getElementById("days");box.innerHTML="";const first=gOf(jy,jm,1),sun=(first.getDay()+1)%7;for(let i=0;i<sun;i++){const e=document.createElement("div");e.className="day empty";box.appendChild(e)}const today=pToday(),max=daysInMonth(jy,jm);for(let d=1;d<=max;d++){const b=document.createElement("button");b.type="button";b.className="day";const g=gOf(jy,jm,d),id=iso(g);if(jy<today.y||(jy===today.y&&jm<today.m)||(jy===today.y&&jm===today.m&&d<today.d))b.classList.add("disabled");const hol=holidays.some(h=>h.date===id);if(hol)b.classList.add("holiday");if(id===selectedDate)b.classList.add("selected");b.textContent=faNum(d);if(!b.classList.contains("disabled")&&!hol)b.onclick=()=>pickDate(jy,jm,d);box.appendChild(b)}}
+function changeMonth(n){jm+=n;if(jm<1){jm=12;jy--}if(jm>12){jm=1;jy++}renderCalendar()}
+function pickDate(y,m,d){const g=gOf(y,m,d);selectedDate=iso(g);document.getElementById("chosen").textContent="تاریخ انتخابی: "+faNum(d)+" "+months[m-1]+" "+faNum(y);renderCalendar();loadTimes()}
+async function loadTimes(){selectedTime="";const box=document.getElementById("times");box.innerHTML="<div class='loading'>در حال بررسی ساعت‌ها...</div>";if(!selectedDate)return;try{const a=await jsonp("availability",{date:selectedDate});const booked=Array.isArray(a.booked)?a.booked:[];const times=Array.isArray(data.activeTimes)?data.activeTimes:[];box.innerHTML=times.length?"":"<div class='loading'>برای این روز ساعتی فعال نیست.</div>";times.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="time"+(booked.includes(t)?" booked":"");b.textContent=booked.includes(t)?t+" — رزرو شده":t;b.disabled=booked.includes(t);if(!b.disabled)b.onclick=()=>{selectedTime=t;document.querySelectorAll(".time").forEach(x=>x.classList.remove("active"));b.classList.add("active")};box.appendChild(b)})}catch(e){box.innerHTML="<div class='loading'>خطا در دریافت ساعت‌ها.</div>"}}
+function fill(){const s=document.getElementById("service"),m=document.getElementById("hairModel");s.innerHTML="";m.innerHTML="";(data.services||[]).forEach(x=>{const o=document.createElement("option");o.value=x.name;o.textContent=x.price?x.name+" — "+x.price:x.name;s.appendChild(o)});(data.hairModels||[]).forEach(x=>{const o=document.createElement("option");o.value=x.name;o.textContent=x.name;m.appendChild(o)});document.getElementById("phone").value="";const f=document.getElementById("footer");f.innerHTML="";if(data.settings.instagram){const a=document.createElement("a");a.href="https://instagram.com/"+String(data.settings.instagram).replace(/^@/,"");a.target="_blank";a.textContent="📷 "+data.settings.instagram;f.appendChild(a)}if(data.settings.phone){const a=document.createElement("a");a.href="tel:"+data.settings.phone;a.textContent="📞 "+data.settings.phone;f.appendChild(a)}}
+async function book(){const n=document.getElementById("name").value.trim(),p=document.getElementById("phone").value.trim(),s=document.getElementById("service").value,m=document.getElementById("hairModel").value;if(!n||!p||!selectedDate||!selectedTime||!s||!m){alert("لطفاً همه اطلاعات را کامل کنید.");return}if(String(data.settings.bookingEnabled)==="false"){alert("رزرو نوبت در حال حاضر غیرفعال است.");return}const btn=document.getElementById("submit");btn.disabled=true;btn.textContent="در حال ارسال...";try{await fetch(GOOGLE_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({name:n,phone:p,service:s,date:selectedDate,time:selectedTime,hairModel:m})});document.getElementById("success").style.display="block";document.getElementById("success").innerHTML="<strong>درخواست نوبت ارسال شد ✨</strong><p>"+esc(s)+"</p><p>"+esc(m)+"</p><p>"+esc(selectedDate)+" — "+esc(selectedTime)+"</p>";btn.textContent="ارسال شد ✓"}catch(e){alert("ارسال انجام نشد. دوباره امتحان کنید.");btn.disabled=false;btn.textContent="ثبت درخواست نوبت"}}
+async function start(){try{data=await jsonp("publicData");holidays=data.holidays||[];const t=pToday();jy=t.y;jm=t.m;renderCalendar();fill();document.getElementById("loading").style.display="none";document.getElementById("form").style.display="block"}catch(e){document.getElementById("loading").textContent="اتصال به سرور انجام نشد."}}
+start();
 </script>
 </body>
 </html>
