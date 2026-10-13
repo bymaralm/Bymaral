@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BYMARAL — پیش‌نمایش آزمایشی</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#08080b;color:#f8f2f5;font-family:Tahoma,Arial,sans-serif;background-image:radial-gradient(ellipse at 50% 0,#29131f,transparent 55%)}.top{height:190px;text-align:center;position:relative;padding:23px 12px}.logo{font-family:"Brush Script MT","Segoe Script",cursive;font-size:76px;font-weight:400;letter-spacing:2px;color:#f2a1bd;text-shadow:0 0 26px #ef8db533;direction:ltr;line-height:1.15}.tag{font:italic 22px Georgia,serif;color:#eab0c3;margin-top:-1px;direction:ltr}.demo{position:absolute;top:12px;left:12px;border:1px solid #624151;border-radius:20px;color:#f2a1bd;font-size:11px;padding:6px 10px}.wrap{max-width:760px;margin:0 auto 35px;padding:0 14px}.card{background:linear-gradient(140deg,#141217,#0d0c10);border:1px solid #39303a;border-radius:18px;padding:23px;box-shadow:0 20px 70px #0008}h1{font-size:21px;color:#f2a1bd;margin:0 0 22px}label{display:block;font-size:13px;color:#e4d9e0;margin-bottom:8px}.field{margin-bottom:17px}input,select{width:100%;padding:13px;border:1px solid #443641;border-radius:10px;background:#0c0b0f;color:#f8f2f5;font:14px Tahoma,Arial}select option{background:#151217}.times{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.time{padding:12px 4px;border:1px solid #714457;border-radius:9px;background:#100d12;color:#f8eaf0;font:13px Tahoma;cursor:pointer}.time.active{background:#f2a1bd;color:#1b0e15;border-color:#f2a1bd}.time:disabled{background:#29252b;color:#77717b;border-color:#333;cursor:not-allowed;text-decoration:line-through}.hint{font-size:11px;color:#aaa0aa;margin-top:9px}.submit{width:100%;margin-top:23px;border:0;border-radius:10px;background:linear-gradient(90deg,#d87d9f,#f3abc4);color:#1b0e15;font:bold 16px Tahoma;padding:15px;cursor:pointer}.msg{display:none;margin-top:15px;padding:15px;border-radius:10px;background:#21151d;border:1px solid #684154;color:#f4cad8;font-size:13px;line-height:2}.admin{display:none;margin-top:10px;background:#17161a;border:1px solid #39333c;border-radius:10px;padding:13px;font-size:12px;color:#c5bdc7;line-height:1.9}.foot{text-align:center;color:#8d7785;font:italic 16px Georgia;margin:24px 0 30px;direction:ltr}@media(max-width:520px){.top{height:160px}.logo{font-size:60px}.tag{font-size:18px}.card{padding:17px}.times{grid-template-columns:repeat(3,1fr)}}
+</style></head>
+<body>
+<header class="top"><span class="demo">نسخه آزمایشی</span><div class="logo">BYMARAL</div><div class="tag">your hair is my art</div></header>
+<main class="wrap"><section class="card"><h1>ثبت رزرو</h1>
+<form id="form">
+<div class="field"><label for="name">نام و نام خانوادگی</label><input id="name" required placeholder="نام و نام خانوادگی را وارد کنید"></div>
+<div class="field"><label for="phone">شماره موبایل</label><input id="phone" required inputmode="tel" placeholder="09xxxxxxxxx"></div>
+<div class="field"><label for="service">خدمات</label><select id="service" required><option value="">انتخاب خدمات</option><option>نمونه نمایشی — در سایت نهایی خدمات فعلی حفظ می‌شوند</option></select></div>
+<div class="field"><label for="model">مدل مو / Hairstyle</label><select id="model" required><option value="">انتخاب مدل مو</option><option>لیر — Layered cut (نمونه نمایشی)</option><option>براشینگ — Blow-dry (نمونه نمایشی)</option></select></div>
+<div class="field"><label for="date">تاریخ شمسی</label><input id="date" required placeholder="۱۴۰۵/۰۷/۲۵"></div>
+<div class="field"><label>ساعت (گزینه‌ای)</label><div class="times" id="times"></div><div class="hint">خاکستری = رزرو شده · صورتی = انتخاب شما</div></div>
+<button class="submit" type="submit">ثبت رزرو</button></form>
+<div class="msg" id="success"><b>درخواست رزرو شما ثبت شد.</b><br>پس از تأیید نهایی، مدیریت شخصاً به شما پیام می‌دهد.</div>
+<div class="admin" id="admin"><b>پیام مخصوص پنل مدیریت</b><br>رزرو ثبت شد؛ از پنل مدیریت بررسی کنید.<br><span>این پیام فقط نمایشی است و در سایت اصلی به مشتری نشان داده نمی‌شود.</span></div>
+</section><footer class="foot">BYMARAL · your hair is my art</footer></main>
+<script>
+const all=['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];const busy=new Set(['12:30','13:00','15:30']);let picked='';const box=document.getElementById('times');all.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='time';b.textContent=busy.has(t)?t+' · رزرو شده':t;b.disabled=busy.has(t);b.onclick=()=>{picked=t;document.querySelectorAll('.time').forEach(x=>x.classList.remove('active'));b.classList.add('active')};box.appendChild(b)});document.getElementById('form').onsubmit=e=>{e.preventDefault();if(!picked){alert('لطفاً ساعت را انتخاب کنید.');return}document.getElementById('success').style.display='block';document.getElementById('admin').style.display='block';};
+</script></body></html>
